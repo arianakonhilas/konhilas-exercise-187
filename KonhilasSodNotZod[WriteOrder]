@@ -1,0 +1,61 @@
+//AUTHOR: Ariana Konhilas
+//COURSE: CPT 187
+//PURPOSE: [Writes customer order details to a file]
+//STARTDATE: [09/30/2020]
+
+package edu.cpt187.konhilas.exercise6;
+
+import java.io.PrintWriter; //imports print writer
+import java.io.FileWriter; //imports file writer
+import java.io.IOException; //imports IO exception
+
+public class WriteOrder 
+{
+	//Declare and Initialize Attributes
+	private boolean fileFoundFlag = false;
+	private String masterFileName = "";
+	private int recordCount = 0;
+
+	public WriteOrder(String borrowedFileName) //constructor non-default
+	{
+		masterFileName = borrowedFileName;
+	}
+
+	//Behaviors - Setters
+	//attempts to write a file
+	public void setWriteOrder(int borrowedItemID, String borrowedItemName, double borrowedItemPrice, int borrowedQuantity, double borrowedOrderCost)
+	{
+		try
+		{//if file is found/open
+			PrintWriter filePW = new PrintWriter (new FileWriter(masterFileName, false));
+			filePW.printf("%n%d\t%s\t%f\t%d\t%f", borrowedItemID, borrowedItemName, borrowedItemPrice, borrowedQuantity, borrowedOrderCost);
+			fileFoundFlag = true;
+			filePW.close();
+		}//end file found
+		catch (IOException ex)
+		{//error catching
+			fileFoundFlag = false;
+		}//end error catching
+	}
+
+	//Behaviors - Getters
+	//returns a value
+	public boolean getFileFoundGlag()
+	{
+		return fileFoundFlag;	
+	}
+
+	//returns a value
+	public String getFileName()
+	{
+		return masterFileName;
+	}
+
+	//returns a value
+	public int getRecordCount()
+	{
+		return recordCount;
+	}
+
+
+}//END of Class
