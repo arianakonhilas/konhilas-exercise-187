@@ -1,0 +1,175 @@
+//AUTHOR: Ariana Konhilas
+//COURSE: CPT 187
+//PURPOSE: [Tracks all the information for a orders]
+//STARTDATE: [09/30/2020]
+
+
+package edu.cpt187.konhilas.exercise6;
+
+public class Order 
+{
+	//Declare and Initialize Constants
+	private final double TAX_RATE = .075;
+
+	//Declare and Initialize Attributes
+	private int discountType = 0;
+	private int itemID = 0;
+	private String itemName = "";
+	private double itemPrice = 0.0;
+	private String discountName = "";
+	private double discountRate = 0.0;
+	private int howMany = 0;
+	private int lastItemSelectedIndex = 0;
+	private String prizeName = "";
+
+	public Order() //constructor
+	{
+
+	}
+
+	//assigns a value
+	public void setLastItemSelectedIndex(int borrowedSearchIndex)
+	{
+		lastItemSelectedIndex = borrowedSearchIndex;
+	}
+
+	//assigns a value at an index
+	public void setItemID(int[] borrowedItemIDs)
+	{
+		itemID = borrowedItemIDs[lastItemSelectedIndex];
+	}
+
+	//assigns a value at an index
+	public void setItemName(String[] borrowedItemNames)
+	{
+		itemName = borrowedItemNames[lastItemSelectedIndex];
+	}
+
+	//assigns a value at an index
+	public void setItemPrice(double[] borrowedItemPrices)
+	{
+		itemPrice = borrowedItemPrices[lastItemSelectedIndex];
+	}
+
+	//assigns a converted value
+	public void setHowMany(String borrowedHowMany)
+	{
+		howMany = Integer.parseInt(borrowedHowMany);
+	}
+
+	//assigns a value
+	public void setDiscountType(char borrowedMenuSelection)
+	{
+		discountType = borrowedMenuSelection;
+	}
+
+	//assigns a value
+	public void setDiscountName(String[] borrowedDiscountNames)
+	{
+		discountName = borrowedDiscountNames[discountType - 'A'];
+	}
+
+	//assigns a value at an index
+	public void setDiscountRate(double[] borrowedDiscountRate)
+	{
+		discountRate = borrowedDiscountRate[discountType - 'A'];
+	}
+
+	//assigns a value at an index
+	public void setPrizeName(String[] borrowedPrizeNames, int borrowedPrizeIndex)
+	{
+		prizeName = borrowedPrizeNames[borrowedPrizeIndex];
+	}
+
+	//assigns a value to a borrowed object
+	public void setDecreaseInStock(Inventory borrowedInventoryObject)
+	{
+		borrowedInventoryObject.setReduceStock(howMany);
+	}
+
+	//Behaviors - Getters
+	//returns a value at an index
+	public int getInStockCount(int[] borrowedInStockCounts)
+	{
+		return borrowedInStockCounts[lastItemSelectedIndex];
+	}
+
+	//returns a value
+	public int getItemID()
+	{
+		return itemID;
+	}
+
+	//returns a value
+	public String getItemName()
+	{
+		return itemName;
+	}
+
+	//returns a value
+	public double getItemPrice()
+	{
+		return itemPrice;
+	}
+
+	//returns a value
+	public int getHowMany()
+	{
+		return howMany;
+	}
+
+	//returns a value
+	public String getDiscountName()
+	{
+		return discountName;
+	}
+
+	//returns a value
+	public double getDiscountRate()
+	{
+		return discountRate;
+	}
+
+	//returns a calculated value
+	public double getDiscountAmt()
+	{
+		return itemPrice * discountRate;
+	}
+
+	//returns a calculated value
+	public double getDiscountPrice()
+	{
+		return itemPrice - getDiscountAmt();
+	}
+
+	//returns a value
+	public String getPrizeName()
+	{
+		return prizeName;
+	}
+
+	//returns a calculated value
+	public double getSubTotal()
+	{
+		return howMany * getDiscountPrice();
+	}
+
+	//returns a value
+	public double getTaxRate()
+	{
+		return TAX_RATE;
+	}
+
+	//returns a calculated value
+	public double getTaxAmt()
+	{
+		return getSubTotal() * TAX_RATE;
+	}
+
+	//returns a calculated value
+	public double getTotalCost()
+	{
+		return getSubTotal() + getTaxAmt();
+	}
+
+}//END of Class
